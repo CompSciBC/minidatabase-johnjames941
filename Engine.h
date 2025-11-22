@@ -64,6 +64,8 @@ struct Engine {
 
         heap[recordIndex].deleted = true;
 
+        idIndex.erase(id);
+
         return true;
     }
 
