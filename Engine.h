@@ -97,8 +97,20 @@ struct Engine {
     // Returns all records with ID in the range [lo, hi].
     // Also reports the number of key comparisons performed.
     vector<const Record *> rangeById(int lo, int hi, int &cmpOut) {
-        cmpOut = 0; //Placeholder
-        return {}; //Placeholder 
+        vector<const Record *> results;
+
+        idIndex.resetMetrics();
+
+        idIndex.rangeApply(lo, hi, [&](const int &key, int &recordIndex) {
+            if (recordIndex >= 0 &&
+                recordIndex < (int)heap.size() &&
+                !heap[recordIndex].deleted) {
+                    results.push_back(&heap[recordIndex]);
+                }
+        }
+    );
+
+        cmpOut = idIndex.comparisons;
     }
 
     // Returns all records whose last name begins with a given prefix.
