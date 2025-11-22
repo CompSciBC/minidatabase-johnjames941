@@ -27,8 +27,23 @@ struct Engine {
     // Inserts a new record and updates both indexes.
     // Returns the record ID (RID) in the heap.
     int insertRecord(const Record &recIn) {
-        //TODO
+        int recordIndex = heap.size();
+        heap.push_back(recIn);
+
+        idIndex.insert(recIn.id, recordIndex);
+
+        string lastNameKey = toLower (recIn.last);
+
+        auto vectorPointer = lastIndex.find(lastNameKey);
+        if (vectorPointer) {
+            vectorPointer->push_back(recordIndex);
+        } else {
+            lastIndex.insert (lastNameKey, vector<int>{recordIndex});
+        }
+        return recIn.id;
     }
+
+    
 
     // Deletes a record logically (marks as deleted and updates indexes)
     // Returns true if deletion succeeded.
@@ -40,7 +55,8 @@ struct Engine {
     // Returns a pointer to the record, or nullptr if not found.
     // Outputs the number of comparisons made in the search.
     const Record *findById(int id, int &cmpOut) {
-        //TODO    }
+        //TODO    
+    }
 
     // Returns all records with ID in the range [lo, hi].
     // Also reports the number of key comparisons performed.
