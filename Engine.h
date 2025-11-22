@@ -48,7 +48,23 @@ struct Engine {
     // Deletes a record logically (marks as deleted and updates indexes)
     // Returns true if deletion succeeded.
     bool deleteById(int id) {
-        return false; //Placeholder
+        idIndex.resetMetrics();
+
+        int *recordIndexPointer = idIndex.find(id);
+
+        if (!recordIndexPointer) {
+            return false;
+        }
+
+        int recordIndex = *recordIndexPointer;
+
+        if (recordIndex < 0 || recordIndex >= (int)heap.size()) {
+            return false;
+        }
+
+        heap[recordIndex].deleted = true;
+
+        return true;
     }
 
     // Finds a record by student ID.
