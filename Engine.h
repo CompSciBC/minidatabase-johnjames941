@@ -111,6 +111,8 @@ struct Engine {
     );
 
         cmpOut = idIndex.comparisons;
+
+        return results;
     }
 
     // Returns all records whose last name begins with a given prefix.
