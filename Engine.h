@@ -48,7 +48,7 @@ struct Engine {
     // Deletes a record logically (marks as deleted and updates indexes)
     // Returns true if deletion succeeded.
     bool deleteById(int id) {
-        idIndex.resetMetrics();
+        //idIndex.resetMetrics();
 
         int *recordIndexPointer = idIndex.find(id);
 
