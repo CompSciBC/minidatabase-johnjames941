@@ -122,7 +122,7 @@ struct Engine {
 
         string lowerPrefix = toLower(prefix);
 
-        string upperBound = lowerPrefix = "\xFF";
+        string upperBound = lowerPrefix + "\xFF";
 
         lastIndex.resetMetrics();
 
