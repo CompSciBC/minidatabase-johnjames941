@@ -43,6 +43,11 @@ struct Engine {
         return recIn.id;
     }
 
+    //If entry for lowercase last name exists then append to vector, otherwise
+    //create new vector and insert into bst
+
+    //Used auto to have compiler automatically determine variable type
+
     
 
     // Deletes a record logically (marks as deleted and updates indexes)
@@ -68,6 +73,9 @@ struct Engine {
 
         return true;
     }
+
+    //If record is out of range don''t delete. Otherwise mark record as
+    //logically deleted in the heap. Remove ID from ID index.
 
     // Finds a record by student ID.
     // Returns a pointer to the record, or nullptr if not found.
@@ -96,6 +104,11 @@ struct Engine {
         return &heap[recordIndex];
     }
 
+    //Confirm record index is within bounds of heap.
+    //If record is out of range or record is marked deleted
+    //then search fails and returns null pointer. Otherwise
+    //return pointer to the non-deleted record
+
     // Returns all records with ID in the range [lo, hi].
     // Also reports the number of key comparisons performed.
     vector<const Record *> rangeById(int lo, int hi, int &cmpOut) {
@@ -116,6 +129,8 @@ struct Engine {
 
         return results;
     }
+
+    //Filters out invalid indexes and records marked as deleted
 
     // Returns all records whose last name begins with a given prefix.
     // Case-insensitive using lowercase comparison.
@@ -149,6 +164,11 @@ struct Engine {
 
             return results;
         }
+
+        //Used a computed upper bound to limit the scan to keys that
+        //share the prefix, and verifies each result is valid and not deleted
+
     };
+    
 
 #endif
